@@ -18,12 +18,8 @@ namespace uowpublic.Data
         [MaxLength(255)]
         public string Type { get; set; }
 
-        [Required]
-        public decimal Rent { get; set; }
 
-        public string Photos { get; set; } 
 
-        public string Description { get; set; }
 
     }
 }
