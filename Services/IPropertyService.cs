@@ -65,7 +65,8 @@ namespace uowpublic.Services
                 property.Attribute = updatedProperty.Attribute;
                 property.Longitude = updatedProperty.Longitude;
                 property.Latitude = updatedProperty.Latitude;
-
+                property.IsDeleted = updatedProperty.IsDeleted;
+                
                 await _context.SaveChangesAsync();
             }
         }
