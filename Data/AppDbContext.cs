@@ -10,7 +10,7 @@ namespace uowpublic.Data
         public DbSet<User> User { get; set; }
         public DbSet<Property> Property { get; set; }
         public DbSet<PropertyPhoto> PropertyPhotos { get; set; }
-        public DbSet<Post> Posts { get; set; }
+        public DbSet<Post> Post { get; set; }
         public DbSet<PostPhoto> PostPhotos { get; set; }
         public DbSet<PostTag> PostTags { get; set; }
         public DbSet<Tag> Tag { get; set; }

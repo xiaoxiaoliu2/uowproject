@@ -56,10 +56,10 @@ namespace uowpublic.Services
             var comment = await _context.Comment.FindAsync(id);
             if (comment != null)
             {
-                comment.UserId = updatedComment.UserId;
-                comment.PostId = updatedComment.PostId;
+                comment.User_Id = updatedComment.User_Id;
+                comment.Post_Id = updatedComment.Post_Id;
                 comment.Content = updatedComment.Content;
-                comment.CreatedAt = updatedComment.CreatedAt;
+                comment.Created_At = updatedComment.Created_At;
                 comment.IsDeleted = updatedComment.IsDeleted;
 
                 await _context.SaveChangesAsync();

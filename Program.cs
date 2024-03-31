@@ -20,6 +20,8 @@ builder.Services.AddDbContext<DatabaseContext>(options =>
 
 // Register services
 builder.Services.AddScoped<IPropertyService, PropertyService>(); // Assuming you have a PropertyService
+builder.Services.AddScoped<ICommentService, CommentService>(); // Assuming you have a PropertyService
+builder.Services.AddScoped<IPostService, PostService>(); // Assuming you have a PropertyService
 
 var app = builder.Build();
 

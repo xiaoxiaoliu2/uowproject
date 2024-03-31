@@ -4,13 +4,13 @@ public class Comment
 {
     public int Id { get; set; }
 
-    public int UserId { get; set; }
+    public int User_Id { get; set; }
 
-    public int PostId { get; set; }
+    public int Post_Id { get; set; }
 
     public required string Content { get; set; }
 
-    public DateTime CreatedAt { get; set; } = DateTime.Now;
+    public DateTime Created_At { get; set; } = DateTime.Now;
 
     public bool IsDeleted { get; set; }
 }
