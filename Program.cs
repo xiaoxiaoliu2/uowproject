@@ -19,9 +19,10 @@ builder.Services.AddDbContext<DatabaseContext>(options =>
     options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString)));
 
 // Register services
-builder.Services.AddScoped<IPropertyService, PropertyService>(); // Assuming you have a PropertyService
-builder.Services.AddScoped<ICommentService, CommentService>(); // Assuming you have a PropertyService
-builder.Services.AddScoped<IPostService, PostService>(); // Assuming you have a PropertyService
+builder.Services.AddScoped<IPropertyService, PropertyService>();
+builder.Services.AddScoped<ICommentService, CommentService>();
+builder.Services.AddScoped<IPostService, PostService>();
+builder.Services.AddScoped<ICourseService, CourseService>();
 
 var app = builder.Build();
 

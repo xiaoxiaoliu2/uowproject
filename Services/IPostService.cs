@@ -14,6 +14,10 @@ namespace uowpublic.Services
         Task<Post?> GetAsync(int id);
         Task RemoveAsync(int id);
         Task UpdateAsync(int id, Post updatedPost);
+
+        Task<List<PostPhoto>> GetPhotosForPostAsync(int postId);
+        Task<List<Tag>> GetTagsForPostAsync(int postId);
+        Task<List<Post>> GetPostsForTagAsync(int tagId);
     }
 
     public class PostService : IPostService
@@ -33,7 +37,7 @@ namespace uowpublic.Services
 
         public async Task<List<Post>> GetAsync()
         {
-            return await _context.Post.ToListAsync();
+            return await _context.Post.Where(p => p.IsDeleted == false).ToListAsync();
         }
 
         public async Task<Post?> GetAsync(int id)
@@ -46,7 +50,7 @@ namespace uowpublic.Services
             var post = await _context.Post.FindAsync(id);
             if (post != null)
             {
-                _context.Post.Remove(post);
+                post.IsDeleted = true;
                 await _context.SaveChangesAsync();
             }
         }
@@ -63,6 +67,27 @@ namespace uowpublic.Services
                 post.IsDeleted = updatedPost.IsDeleted;
                 await _context.SaveChangesAsync();
             }
+        }
+
+        public async Task<List<PostPhoto>> GetPhotosForPostAsync(int postId)
+        {
+            return await _context.PostPhoto.Where(pp => pp.PostId == postId && pp.IsDeleted == false).ToListAsync();
+        }
+
+        public async Task<List<Tag>> GetTagsForPostAsync(int postId)
+        {
+            return await _context.PostTag
+                .Where(pt => pt.PostId == postId && pt.IsDeleted == false)
+                .Join(_context.Tag, pt => pt.TagId, t => t.Id, (pt, t) => t)
+                .ToListAsync();
+        }
+
+        public async Task<List<Post>> GetPostsForTagAsync(int tagId)
+        {
+            return await _context.PostTag
+                .Where(pt => pt.TagId == tagId && pt.IsDeleted == false)
+                .Join(_context.Post, pt => pt.PostId, p => p.Id, (pt, p) => p)
+                .ToListAsync();
         }
     }
 }
